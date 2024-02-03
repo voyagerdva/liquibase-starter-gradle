@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: liqui-starter
+    url: http://localhost:8080
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    password: "postgres"
+    username: "postgres"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    enabled: true
+    change-log: classpath:/scripts/changelog-master.xml
+    url: jdbc:postgresql://localhost:5432/postgres
+    database-change-log-table: "DATABASE_CHANGE_LOG"
+    database-change-log-lock-table: "DATABASE_CHANGE_LOG_LOCK"
+    password: "postgres"
+    user: "postgres"
+    liquibase-schema: "liquibase"
+    default-schema: "bhub_aiinops"
+    parameters:
+      liquibase.changelogLockSmartCheckUpdateEnabled: true
+      liquibase.changelogLockDeadLockCleanerEnabled: true
+      liquibase.changelogLockDeadLockWaitTimeDuration: PT3005
+      liquibase.changelogLockWaitTimeInMinuter: 5
+      liquibase.changelogLockPollRate: 10
+logging:
+  level:
+    root: info
+    liquibase: trace
+    nn.ru.LiquiAppRunner: debug
